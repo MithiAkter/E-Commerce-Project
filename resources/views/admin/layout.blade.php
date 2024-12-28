@@ -64,8 +64,8 @@
           </a><!-- sl-menu-link -->
           <ul class="sl-menu-sub nav flex-column">
             <li class="nav-item"><a href="{{ route('categories') }}" class="nav-link">Category</a></li>
-            <li class="nav-item"><a href="chart-flot.html" class="nav-link">Sub Category</a></li>
-            <li class="nav-item"><a href="" class="nav-link">Brand</a></li>
+            <li class="nav-item"><a href="{{ route('subcategories') }}" class="nav-link">Sub Category</a></li>
+            <li class="nav-item"><a href="{{ route('brands') }}" class="nav-link">Brand</a></li>
           </ul>
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
@@ -124,28 +124,35 @@
       <div class="sl-mainpanel">
         @yield('admin_content')
       </div>
-      {{-- @yield('admin_content') --}}
-   
-    <script>  
-        $(document).on("click", "#delete", function(e){
-            e.preventDefault();
-            var link = $(this).attr("href");
-               swal({
-                 title: "Are you Want to delete?",
-                 text: "This will be Permanently Delete!",
-                 icon: "warning",
-                 buttons: true,
-                 dangerMode: true,
-               })
-               .then((willDelete) => {
-                 if (willDelete) {
-                      window.location.href = link;
-                 } else {
-                   swal("Safe Your Data!");
-                 }
-               });
-           });
-   </script>
+
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- SweetAlert -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <script>  
+            $(document).on("click", "#delete", function(e) {
+                e.preventDefault(); // Prevent default anchor behavior
+                var link = $(this).attr("href"); // Get the link URL
+                swal({
+                    title: "Are you sure you want to delete?",
+                    text: "This will permanently delete the category.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link; // Redirect to delete the item
+                    } else {
+                        swal("Your data is safe!"); // Display cancellation message
+                    }
+                });
+            });
+        </script>
+
+
     <script src="{{ asset('backend/lib/jquery/jquery.js') }}"></script>
     <script src="{{ asset('backend/lib/popper.js/popper.js') }}"></script>
     <script src="{{ asset('backend/lib/bootstrap/bootstrap.js') }}"></script>
