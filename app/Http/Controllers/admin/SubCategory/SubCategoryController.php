@@ -2,9 +2,7 @@
 namespace App\Http\Controllers\Admin\SubCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\SubCategory;
-use DB;
-use Yoeunes\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 
 
 class SubCategoryController extends Controller

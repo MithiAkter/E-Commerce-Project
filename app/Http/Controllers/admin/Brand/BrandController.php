@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Brand;
-use DB;
-use Yoeunes\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\DB;
 
 class BrandController extends Controller
 {

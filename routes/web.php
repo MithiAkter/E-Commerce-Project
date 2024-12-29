@@ -1,8 +1,11 @@
 <?php
-use App\Http\Controllers\admin\AdminDashboardController;
-use App\Http\Controllers\admin\Brand\BrandController;
+use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
+use App\Http\Controllers\Admin\Coupon\CouponController;
+use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,10 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('homepage.index');
+    // return view('auth.login');
 });
 
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
 Route::middleware('auth')->group(function () {
+
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('home');
 
     //Categories
@@ -43,9 +50,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/update/brand/{id}', [BrandController::class, 'UpdateBrand'])->name('brand.update');
     Route::get('/delete/brand/{id}', [BrandController::class, 'DeleteBrand'])->name('brand.destroy');;
 
+    //Coupons
+    Route::get('/admin/coupon', [CouponController::class, 'index'])->name('admin.coupon');
+    Route::post('/coupon-store', [CouponController::class, 'store'])->name('coupon.store');
+    Route::get('/edit/coupon/{id}', [CouponController::class, 'EditCoupon'])->name('coupon.edit');
+    Route::post('/update/coupon/{id}', [CouponController::class, 'UpdateCoupon'])->name('coupon.update');
+    Route::get('/delete/coupon/{id}', [CouponController::class, 'DeleteCoupon'])->name('coupon.destroy');;
 
+    //newsletter
+    Route::get('/admin/newsletter', [CouponController::class, 'Newsletter'])->name('admin.newsletter');
+    Route::get('/delete/coupon/{id}', [CouponController::class, 'DeleteSub'])->name('newsletter.destroy');;
 
-
+    //frontend routes
+    Route::post('/store/newsletter', [FrontController::class, 'StoreNewsletter'])->name('store.newsletter');
 
 
     // Route::get('edit/category/{id}','Admin\Category\CategoryController@EditCategory');

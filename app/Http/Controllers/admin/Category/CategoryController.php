@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Category;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Yoeunes\Toastr\Facades\Toastr;
 
 class CategoryController extends Controller
