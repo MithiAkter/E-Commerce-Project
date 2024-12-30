@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
+use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,10 @@ Route::middleware('auth')->group(function () {
     //newsletter
     Route::get('/admin/newsletter', [CouponController::class, 'Newsletter'])->name('admin.newsletter');
     Route::get('/delete/coupon/{id}', [CouponController::class, 'DeleteSub'])->name('newsletter.destroy');;
+
+    //products
+    Route::get('/admin/product/all', [ProductController::class, 'index'])->name('all.product');
+    Route::get('/admin/product/add', [ProductController::class, 'create'])->name('product.add');
 
     //frontend routes
     Route::post('/store/newsletter', [FrontController::class, 'StoreNewsletter'])->name('store.newsletter');

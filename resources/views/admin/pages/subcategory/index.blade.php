@@ -12,16 +12,19 @@
             <table id="datatable1" class="table display responsive nowrap">
               <thead>
                 <tr>
-                  <th class="wd-15p">Id</th>
+                  <th class="wd-15p">SN</th>
+                  <th class="wd-15p">Category Name</th>
                   <th class="wd-15p">Sub-Category Name</th>
                   <th class="wd-20p">Action</th>
                 </tr>
               </thead>
               <tbody>
+                @php($serial = 1)
                 @foreach($subcat as $row)
                 <tr>
-                  <td>{{( $row->subcategory_name )}}</td>
+                  <td>{{$serial++}}</td>
                   <td>{{( $row->category_name )}}</td>
+                  <td>{{( $row->subcategory_name )}}</td>
                   <td>
                     <a href="{{ route('subcategories.edit', $row->id) }}" class="btn btn-info btn-sm" style="width: 80px; padding:5px; border-radius: 5px;">Edit</a>
                     <a href="{{ route('subcategories.destroy', $row->id) }}" id="delete" class="btn btn-danger btn-sm" style="width: 80px; padding:5px; border-radius: 5px;">
@@ -55,12 +58,6 @@
              <form action="{{route('subcategories.store')}}" method="post">
              @csrf
              <div class="modal-body pd-20">
-
-             <div class="form-group">
-               <label for="exampleInputSubCategory">Sub-Category Name</label>
-                <input type="text" class="form-control" name="subcategory_name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Sub-Category Name">
-             </div>
-
              <div class="form-group">
                <label for="exampleInputSubCategory">Sub-Category Name</label>
                 <select class="form-control" name="category_id">
@@ -68,6 +65,11 @@
                         <option value="{{ $row->id }}">{{ $row->category_name }}</option>
                     @endforeach
                 </select>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputSubCategory">Sub-Category Name</label>
+                 <input type="text" class="form-control" name="subcategory_name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Sub-Category Name">
               </div>
 
               <div class="modal-footer">

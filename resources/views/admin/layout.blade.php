@@ -84,33 +84,29 @@
             <li class="nav-item"><a href="{{ route('admin.coupon') }}" class="nav-link">Coupon</a></li>
           </ul>
         </div>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
-            <span class="menu-item-label">Others</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a>
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">Newsletter</a></li>
-        </ul>
 
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
             <span class="menu-item-label">Products</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+          </div>
+        </a>
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('product.add') }}" class="nav-link">Add Product</a></li>
+          <li class="nav-item"><a href="{{ route('all.product') }}" class="nav-link">All Product</a></li>
+        </ul>
 
-
-        <a href="mailbox.html" class="sl-menu-link">
+        <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
-            <span class="menu-item-label">Mailbox</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-
+            <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
+            <span class="menu-item-label">Others</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div>
+        </a>
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('admin.newsletter') }}" class="nav-link">Newsletter</a></li>
+        </ul>
       </div>
 
 

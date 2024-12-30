@@ -19,22 +19,23 @@
       <form action="{{ route('subcategories.update', $subcat->id) }}" method="post">
       @csrf
       <div class="modal-body pd-20">
+
+        <div class="form-group">
+          <label for="exampleInputSubCategory">Sub-Category Name</label>
+          <select class="form-control" name="category_id">
+              @foreach ($category as $row)
+                  <option value="{{ $row->id }}" {{ $row->id == $subcat->category_id ? 'selected' : '' }}>
+                      {{ $row->category_name }}
+                  </option>
+              @endforeach
+          </select>
+        </div>
+
        <div class="form-group">
          <label for="exampleInputSubCategory">Sub-Category Name</label>
           <input type="text" class="form-control" name="subcategory_name" id="exampleInputEmail1" aria-describedby="emailHelp" 
           value="{{( $subcat->subcategory_name )}}" required>
        </div>
-
-       <div class="form-group">
-        <label for="exampleInputSubCategory">Sub-Category Name</label>
-        <select class="form-control" name="category_id">
-            @foreach ($category as $row)
-                <option value="{{ $row->id }}" {{ $row->id == $subcat->category_id ? 'selected' : '' }}>
-                    {{ $row->category_name }}
-                </option>
-            @endforeach
-        </select>
-    </div>
     
      </div>
         <div class="modal-footer">
