@@ -43,6 +43,8 @@
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend/css/starlight.css') }}">
     <link href="{{ asset('backend/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
+    <link href="{{ asset('backend/lib/summernote/summernote-bs4.css')}}" rel="stylesheet">
+
   </head>
 
   <body>
@@ -226,6 +228,10 @@
     <script src="{{ asset('backend/js/dashboard.js') }}"></script>
     <script src="{{ asset('backend/lib/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('backend/lib/datatables-responsive/dataTables.responsive.js') }}"></script>
+
+    <script src="{{ asset('backend/lib/summernote/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('backend/lib/medium-editor/medium-editor.js') }}"></script>
+
     <script>
       $(function(){
         'use strict';

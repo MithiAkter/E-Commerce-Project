@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -11,6 +12,8 @@ class ProductController extends Controller
         echo("done1");
     }
     public function create(){
-        return view('admin.product.index');
+        $category=DB::table('categories')->get();
+        $brand=DB::table('brands')->get();
+        return view('admin.product.index', compact('category','brand'));
     }
 }
