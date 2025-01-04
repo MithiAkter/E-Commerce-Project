@@ -28,7 +28,7 @@
                   <td>{{( $row->discount )}}%</td>
                   <td>
                     <a href="{{ route('coupon.edit', $row->id) }}" class="btn btn-info btn-sm" style="width: 80px; padding:5px; border-radius: 5px;">Edit</a>
-                    <a href="#" id="delete" class="btn btn-danger btn-sm" style="width: 80px; padding:5px; border-radius: 5px;">
+                    <a href="{{ route('coupon.destroy', $row->id) }}" id="delete" class="btn btn-danger btn-sm" style="width: 80px; padding:5px; border-radius: 5px;">
                       Delete
                     </a>
                   </td>

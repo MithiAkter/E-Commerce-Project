@@ -6,7 +6,7 @@
         </div>
         <div class="card pd-20 pd-sm-40">
           <h6 class="card-body-title">Subscriber List
-          <a href="#" class="btn btn-danger btn-sm" style="float:right;" id="delete">All Delete</a>
+          <a href="#" class="btn btn-danger btn-sm " style="float:right; border-radius: 5px; width: 100px; padding:5px;" id="delete">All Delete</a>
           </h6>
           <div class="table-wrapper">
             <table id="datatable1" class="table display responsive nowrap">

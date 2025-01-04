@@ -54,7 +54,7 @@ class CouponController extends Controller
         $sub=DB::table('newsletters')->get();
         return view('admin.coupon.newsletter',compact('sub'));
     }
-    public function DeleteSub($id){
+    public function DeleteNewsletter($id){
         DB::table('newsletters')->where('id',$id)->delete();
         $notification = array(
             'messege'=>'Subscriber successfully Deleted',

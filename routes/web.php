@@ -60,11 +60,24 @@ Route::middleware('auth')->group(function () {
 
     //newsletter
     Route::get('/admin/newsletter', [CouponController::class, 'Newsletter'])->name('admin.newsletter');
-    Route::get('/delete/coupon/{id}', [CouponController::class, 'DeleteSub'])->name('newsletter.destroy');;
+    Route::get('/delete/newsletter/{id}', [CouponController::class, 'DeleteNewsletter'])->name('newsletter.destroy');;
 
     //products
     Route::get('/admin/product/all', [ProductController::class, 'index'])->name('all.product');
     Route::get('/admin/product/add', [ProductController::class, 'create'])->name('product.add');
+    Route::post('/admin/store/product', [ProductController::class, 'store'])->name('store.product');
+    Route::get('/edit/product/{id}', [ProductController::class, 'EditProduct'])->name('product.edit');
+    Route::post('/update/product/{id}', [ProductController::class, 'UpdateProduct'])->name('product.update');
+    Route::get('/delete/product/{id}', [ProductController::class, 'DeleteProduct'])->name('product.destroy');;
+    Route::get('/view/product/{id}', [ProductController::class, 'ViewProduct'])->name('product.view');;
+
+
+
+    Route::get('/inactive/product/{id}', [ProductController::class, 'Inactive'])->name('inactive.product');;
+    Route::get('/active/product/{id}', [ProductController::class, 'Active'])->name('active.product');;
+
+    //get sub cat by ajax
+    Route::get('/get/subcategory/{category_id}', [ProductController::class, 'GetSubcat']);
 
     //frontend routes
     Route::post('/store/newsletter', [FrontController::class, 'StoreNewsletter'])->name('store.newsletter');

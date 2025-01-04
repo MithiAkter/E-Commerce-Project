@@ -1,10 +1,5 @@
 @extends('admin.layout')
 @section('admin_content')
-@php
-    $brand=DB::table('brands')->get();
-    $category=DB::table('categories')->get();
-    $subcategory=DB::table('subcategories')->get();
-@endphp
     <!-- Required CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" crossorigin="anonymous">
@@ -28,41 +23,38 @@
         }
     </style>
     <nav class="breadcrumb sl-breadcrumb">
-        <a class="breadcrumb-item" href="#">E-Commerce</a>
+        <a class="breadcrumb-item" href="#">Starlight</a>
         <span class="breadcrumb-item active">Product Section</span>
     </nav>
     
     <div class="sl-pagebody">
         <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Update Product</h6>
-            <p class="mg-b-20 mg-sm-b-30">Update Product</p>
-            <form action="{{ route('product.update', $product->id) }}" method="post" >
+            <h6 class="card-body-title">New Product Add <a href="#" class="btn btn-success btn-sm pull-right">All Product</a></h6>
+            <p class="mg-b-20 mg-sm-b-30">New product add form</p>
+            <form action="{{ route('store.product') }}" method="post" enctype="multipart/form-data">
                 @csrf
             <div class="form-layout">
                 <div class="row mg-b-25">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Product Name: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="product_name" value="{{ $product->product_name }}">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="product_code" value="{{ $product->product_code }}">
+                            <input class="form-control" type="text" name="product_name">
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    
+
+                    <div class="col-lg-4">
                         <div class="form-group">
-                            <label class="form-control-label">Quantity: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="product_quantity"  value="{{ $product->product_quantity }}">
+                            <label class="form-control-label">Product Code: <span class="tx-danger">*</span></label>
+                            <input class="form-control" type="text" name="product_code">
                         </div>
                     </div>
-                    <div class="col-lg-6">
+
+                    <div class="col-lg-4">
                         <div class="form-group">
-                            <label class="form-control-label">Discount Price <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="discount_price"  value="{{ $product->discount_price }}">
+                            <label class="form-control-label">Quantity: <span class="tx-danger">*</span></label>
+                            <input class="form-control" type="text" name="product_quantity">
                         </div>
                     </div>
 
@@ -72,10 +64,7 @@
                           <select class="form-control select2" data-placeholder="Choose Category" name="category_id">
                             <option label="Choose Category"></option>
                             @foreach ($category as $row)
-                                <option value="{{ $row->id }}"<?php
-                                    if($row->id == $product->category_id){
-                                        echo "selected";
-                                    } ?> >{{ $row->category_name }}</option> 
+                                <option value="{{ $row->id }}">{{ $row->category_name }}</option>
                             @endforeach
                             
                           </select>
@@ -86,12 +75,7 @@
                           <label class="form-control-label">Sub Category: <span class="tx-danger">*</span></label>
                           <select class="form-control select2" data-placeholder="Choose Sub Category" name="subcategory_id">
                             <option label="Choose Sub Category"></option>
-                            @foreach ($subcategory as $row)
-                                <option value="{{ $row->id }}"<?php
-                                    if($row->id == $product->subcategory_id){
-                                        echo "selected";
-                                    } ?> >{{ $row->subcategory_name }}</option> 
-                            @endforeach
+                            
                           </select>
                         </div>
                       </div>
@@ -102,11 +86,7 @@
                           <select class="form-control select2" data-placeholder="Choose Brand" name="brand_id">
                             <option label="Choose Brand"></option>
                             @foreach ($brand as $br)
-                                <option value="{{ $br->id }}" 
-                                <?php
-                                if($product->brand_id == $br->id){
-                                    echo "selected";
-                                } ?> >{{ $br->brand_name }}</option>          
+                                <option value="{{ $br->id }}" img src="{{ URL::to($br->brand_logo) }}" style="height:30px; width:30px;">{{ $br->brand_name }}</option>              
                             @endforeach
 
                           </select>
@@ -116,7 +96,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Product Size: <span class="tx-danger">*</span></label>
-                            <input class="form-control" type="text" name="product_size" id="size" data-role="tagsinput" value="{{ $product->product_size }}">
+                            <input class="form-control" type="text" name="product_size" id="size" data-role="tagsinput">
                         </div>
                     </div>
 
@@ -124,7 +104,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Product Color: <span class="tx-danger">*</span></label><br>
-                            <input class="form-control lg-4" type="text" name="product_color" id="color" data-role="tagsinput" value="{{ $product->product_color }}">
+                            <input class="form-control lg-4" type="text" name="product_color" id="color" data-role="tagsinput">
                         </div>
                     </div>
 
@@ -132,7 +112,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label class="form-control-label">Selling Price: <span class="tx-danger">*</span></label><br>
-                            <input class="form-control" type="text" name="selling_price" placeholder="Enter selling price" value="{{ $product->selling_price }}">
+                            <input class="form-control" type="text" name="selling_price" placeholder="Enter selling price">
                         </div>
                     </div>
 
@@ -140,7 +120,7 @@
                         <div class="form-group">
                             <label class="form-control-label">Product Details: <span class="tx-danger">*</span></label>
                             <textarea class="form-control" id="summernote" name="product_details" required>
-                                {{ $product->product_details }}
+
                             </textarea>
                         </div>
                     </div>
@@ -148,67 +128,10 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label class="form-control-label">Video Link: <span class="tx-danger">*</span></label>
-                            <input class="form-control" placeholder="video link" name="video_link" value="{{ $product->video_link }}">
-
+                            <input class="form-control" placeholder="video link" name="video_link">
                         </div>
                     </div>
-                </div>
-                <br><hr>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <label class="ckbox">
-                            <input type="checkbox" name="main_slider" value="1" 
-                                {{ $product->main_slider == 1 ? 'checked' : '' }}>
-                            <span>Main Slider</span>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label class="ckbox">
-                            <input type="checkbox" name="hot_deal" value="1"
-                                {{ $product->hot_deal == 1 ? 'checked' : '' }}>
-                            <span>Hot Deal</span>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label class="ckbox">
-                            <input type="checkbox" name="best_rated" value="1"
-                                {{ $product->best_rated == 1 ? 'checked' : '' }}>
-                            <span>Best Rated</span>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label class="ckbox">
-                            <input type="checkbox" name="trend" value="1"
-                                {{ $product->trend == 1 ? 'checked' : '' }}>
-                            <span>Trend Product</span>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label class="ckbox">
-                            <input type="checkbox" name="mid_slider" value="1"
-                                {{ $product->mid_slider == 1 ? 'checked' : '' }}>
-                            <span>Mid Slider</span>
-                        </label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label class="ckbox">
-                            <input type="checkbox" name="hot_new" value="1"
-                                {{ $product->hot_new == 1 ? 'checked' : '' }}>
-                            <span>Hot New</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-layout-footer">
-                    <button class="btn btn-info mg-r-5">Update</button>
-                    <button class="btn btn-secondary">Cancel</button>
-                </div>
-        </form>
-        </div><!-- card -->
 
-
-        <div class="card container">
-            <div class="row">
-                <form action="" method="post" enctype="multipart/form-data">
                     <div class="col-lg-4">
                         <label>Image One (Main Thumbnail) <span class="tx-danger">*</span></label>
                         <div class="file-container">
@@ -239,10 +162,54 @@
                             <img src="#" id="three" class="image_preview">
                         </div>
                     </div>
+                </div>
+                <br><hr>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="ckbox">
+                            <input type="checkbox" name="main_slider" value="1">
+                            <span>Main Slider</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="ckbox">
+                            <input type="checkbox" name="hot_deal" value="1">
+                            <span>Hot Deal</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="ckbox">
+                            <input type="checkbox" name="best_rated" value="1">
+                            <span>Best Rated</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="ckbox">
+                            <input type="checkbox" name="trend" value="1">
+                            <span>Trend Product</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="ckbox">
+                            <input type="checkbox" name="mid_slider" value="1">
+                            <span>Mid Slider</span>
+                        </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="ckbox">
+                            <input type="checkbox" name="hot_new" value="1">
+                            <span>Hot New</span>
+                        </label>
+                    </div>
 
-                </form>
-            </div>
-        </div>
+                <!-- Form Footer -->
+                <div class="form-layout-footer">
+                    <button class="btn btn-info mg-r-5">Submit Form</button>
+                    <button class="btn btn-secondary">Cancel</button>
+                </div><!-- form-layout-footer -->
+            </div><!-- form-layout -->
+        </form>
+        </div><!-- card -->
     </div><!-- sl-pagebody -->
 
 
