@@ -146,7 +146,7 @@
                         <label>Image Two (Main Thumbnail) <span class="tx-danger">*</span></label>
                         <div class="file-container">
                             <label class="custom-file">
-                                <input type="file" id="file" class="custom-file-input" name="image_two" onchange="readURL1(this)">
+                                <input type="file" id="file" class="custom-file-input" name="image_two" onchange="readURL1(this);">
                                 <span class="custom-file-control"></span>
                             </label>
                             <img src="#" id="two" class="image_preview">
@@ -156,7 +156,7 @@
                         <label>Image Three (Main Thumbnail) <span class="tx-danger">*</span></label>
                         <div class="file-container">
                             <label class="custom-file">
-                                <input type="file" id="file" class="custom-file-input" name="image_three" onchange="readURL2(this)">
+                                <input type="file" id="file" class="custom-file-input" name="image_three" onchange="readURL2(this);">
                                 <span class="custom-file-control"></span>
                             </label>
                             <img src="#" id="three" class="image_preview">

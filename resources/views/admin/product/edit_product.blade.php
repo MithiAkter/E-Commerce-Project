@@ -35,10 +35,9 @@
     <div class="sl-pagebody">
         <div class="card pd-20 pd-sm-40">
             <h6 class="card-body-title">Update Product</h6>
-            <p class="mg-b-20 mg-sm-b-30">Update Product</p>
-            <form action="{{ route('product.update', $product->id) }}" method="post" >
+            <form action="{{ route('product.update', $product->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
-            <div class="form-layout">
+                <div class="form-layout">
                 <div class="row mg-b-25">
                     <div class="col-lg-6">
                         <div class="form-group">
@@ -198,18 +197,9 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-layout-footer">
-                    <button class="btn btn-info mg-r-5">Update</button>
-                    <button class="btn btn-secondary">Cancel</button>
-                </div>
-        </form>
-        </div><!-- card -->
 
-
-        <div class="card container">
-            <div class="row">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4">
                         <label>Image One (Main Thumbnail) <span class="tx-danger">*</span></label>
                         <div class="file-container">
                             <label class="custom-file">
@@ -217,6 +207,9 @@
                                 <span class="custom-file-control"></span>
                             </label>
                             <img src="#" id="one" class="image_preview">
+                        </div>
+                        <div>
+                            <img src="{{ URL::to($product->image_one) }}" alt="image_one" style="margin-top:10px; height:80px; width: 90px;">
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -228,6 +221,9 @@
                             </label>
                             <img src="#" id="two" class="image_preview">
                         </div>
+                        <div>
+                            <img src="{{ URL::to($product->image_two) }}" alt="image_two" style="margin-top:10px; height:80px; width: 90px;">
+                        </div>
                     </div>
                     <div class="col-lg-4">
                         <label>Image Three (Main Thumbnail) <span class="tx-danger">*</span></label>
@@ -238,12 +234,26 @@
                             </label>
                             <img src="#" id="three" class="image_preview">
                         </div>
+                        <div>
+                            <img src="{{ URL::to($product->image_three) }}" alt="image_three" style="margin-top:10px; height:80px; width: 90px;">
+                        </div>
                     </div>
+                </div>
+   
+    
 
-                </form>
-            </div>
-        </div>
-    </div><!-- sl-pagebody -->
+                <div class="form-layout-footer">
+                    <button class="btn btn-sm btn-warning mg-r-5" style="margin-top:10px; width: 100px; padding:5px; border-radius: 5px;">Update</button>
+                    <button class="btn btn-sm btn-info" style="margin-top:10px; width: 100px; padding:5px; border-radius: 5px;">Cancel</button>
+                </div>
+            </div><!-- form-layout -->
+        </form>
+    </div><!-- card -->
+</div><!-- sl-pagebody -->
+
+
+        
+  
 
 
     <!-- Required JavaScript -->

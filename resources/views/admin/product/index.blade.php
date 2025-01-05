@@ -35,11 +35,10 @@
                         <td>{{ $row->product_quantity }}</td>
                         <td>
                             @if($row->status == 1)
-                            <span class="badge badge-success">Active</span>
+                            <span class="badge badge-success" style="padding: 7px;">Active</span>
                             @else
-                            <span class="badge badge-success">Inactive</span>
+                            <span class="badge badge-danger" style="padding: 7px;">Inactive</span>
                             @endif
-
                         </td>
                         <td>
                             <a href="{{ route('product.edit', $row->id) }}" class="btn btn-info btn-sm" style="width:60px; padding:5px; border-radius: 5px;"><i class="fa fa-edit"></i></a>

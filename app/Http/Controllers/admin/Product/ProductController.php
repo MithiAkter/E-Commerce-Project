@@ -43,40 +43,12 @@ class ProductController extends Controller
         $data['product_details']=$request->product_details;
         $data['video_link']=$request->video_link;
         $data['main_slider']=$request->main_slider;
-
+        $data['hot_deal']=$request->hot_deal;
         $data['best_rated']=$request->best_rated;
         $data['trend']=$request->trend;
         $data['mid_slider']=$request->mid_slider;
         $data['hot_new']=$request->hot_new;
         $data['status']=1;
-
-        // return response()->json($data);
-        // $image_one=$request->file('image_one');
-        // $image_two=$request->file('image_two');
-        // $image_three=$request->file('image_three');
-    //     if($image_one){
-    //         $image_one_name=hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-    //         Image::make($image_one)->resize(300,300)->save('public/media/product/'.$image_one_name);
-    //         $data['image_one']='public/media/product/'.$image_one_name;
-    //         $product=DB::table('products')->insert($data);
-    //         $notification=array(
-    //             'message'=>'Product Inserted Successfully',
-    //             'alert-type'=>'success'
-    //         );
-    //         return Redirect()->back()->with($notification);
-    // }elseif($image_one && $image_two){
-    //     $image_one_name=hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
-    //     Image::make($image_one)->resize(300,300)->save('public/media/product/'.$image_one_name);
-    //     $data['image_one']='public/media/product/'.$image_one_name;
-    //     $image_two_name=hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
-    //     Image::make($image_two)->resize(300,300)->save('public/media/product/'.$image_two_name);
-    //     $data['image_two']='public/media/product/'.$image_two_name;
-    //     $product=DB::table('products')->insert($data);
-    //         $notification=array(
-    //             'message'=>'Product Inserted Successfully',
-    //             'alert-type'=>'success'
-    //         );
-    //    }
 
         if ($request->hasFile('image_one')) {
             $image_one = $request->file('image_one');
@@ -166,47 +138,89 @@ class ProductController extends Controller
         return view('admin.product.edit_product',compact('product'));
     }
     
-    public function UpdateProduct(Request $request,$id){
-        $data=array();
-        $data['product_name']=$request->product_name;
-        $data['product_code']=$request->product_code;
-        $data['product_quantity']=$request->product_quantity;
-        $data['category_id']=$request->category_id;
-        $data['discount_price']=$request->discount_price;
-        $data['subcategory_id']=$request->subcategory_id;
-        $data['brand_id']=$request->brand_id;
-        $data['product_size']=$request->product_size;
-        $data['product_color']=$request->product_color;
-        $data['selling_price']=$request->selling_price;
-        $data['product_details']=$request->product_details;
-        $data['video_link']=$request->video_link;
-        $data['main_slider']=$request->main_slider;
 
-        $data['best_rated']=$request->best_rated;
-        $data['trend']=$request->trend;
-        $data['mid_slider']=$request->mid_slider;
-        $data['hot_new']=$request->hot_new;
-
-        $update=DB::table('products')->where('id',$id)->update($data);
-        
-        if($update){
-            $notification=array(
-                'message'=>'Product Updated Successfully',
-                'alert-type'=>'success'
+    public function UpdateProduct(Request $request, $id)
+    {
+        // dd($request->all());
+        $data = array();
+        $data['product_name'] = $request->product_name;
+        $data['product_code'] = $request->product_code;
+        $data['product_quantity'] = $request->product_quantity;
+        $data['category_id'] = $request->category_id;
+        $data['discount_price'] = $request->discount_price;
+        $data['subcategory_id'] = $request->subcategory_id;
+        $data['brand_id'] = $request->brand_id;
+        $data['product_size'] = $request->product_size;
+        $data['product_color'] = $request->product_color;
+        $data['selling_price'] = $request->selling_price;
+        $data['product_details'] = $request->product_details;
+        $data['video_link'] = $request->video_link;
+        $data['main_slider'] = $request->main_slider;
+        $data['hot_deal'] = $request->hot_deal;
+        $data['best_rated'] = $request->best_rated;
+        $data['trend'] = $request->trend;
+        $data['mid_slider'] = $request->mid_slider;
+        $data['hot_new'] = $request->hot_new;
+    
+        // Check and handle image uploads
+        if ($request->hasFile('image_one')) {
+            $image_one = $request->file('image_one');
+            $filename = time() . "_Products1." . $image_one->getClientOriginalExtension();
+            $path = 'public/media/product';
+    
+            // Move the image and get the full path
+            $image_one->move(public_path($path), $filename);
+            $data['image_one'] = $path . '/' . $filename;
+    
+            // Optional: Delete the old image if exists
+            $oldImage = DB::table('products')->where('id', $id)->value('image_one');
+            if ($oldImage && file_exists(public_path($oldImage))) {
+                unlink(public_path($oldImage));
+            }
+        }
+    
+        if ($request->hasFile('image_two')) {
+            $image_two = $request->file('image_two');
+            $filename = time() . "_Products2." . $image_two->getClientOriginalExtension();
+            $path = 'public/media/product';
+            $image_two->move(public_path($path), $filename);
+            $data['image_two'] = $path . '/' . $filename;
+    
+            $oldImage = DB::table('products')->where('id', $id)->value('image_two');
+            if ($oldImage && file_exists(public_path($oldImage))) {
+                unlink(public_path($oldImage));
+            }
+        }
+    
+        if ($request->hasFile('image_three')) {
+            $image_three = $request->file('image_three');
+            $filename = time() . "_Products3." . $image_three->getClientOriginalExtension();
+            $path = 'public/media/product';
+            $image_three->move(public_path($path), $filename);
+            $data['image_three'] = $path . '/' . $filename;
+    
+            $oldImage = DB::table('products')->where('id', $id)->value('image_three');
+            if ($oldImage && file_exists(public_path($oldImage))) {
+                unlink(public_path($oldImage));
+            }
+        }
+    
+        // Update the database record
+        $update = DB::table('products')->where('id', $id)->update($data);
+    
+        if ($update !== false) {
+            $notification = array(
+                'message' => 'Product Updated Successfully',
+                'alert-type' => 'success'
             );
             return Redirect()->route('all.product')->with($notification);
-        }else{
-            $notification=array(
-                'message'=>'Nothing to Update',
-                'alert-type'=>'success'
+        } else {
+            $notification = array(
+                'message' => 'Failed to Update Product',
+                'alert-type' => 'error'
             );
             return Redirect()->route('all.product')->with($notification);
         }
-
-        // return response()->json($data);
-        // $image_one=$request->file('image_one');
-        // $image_two=$request->file('image_two');
-        // $image_three=$request->file('image_three');
     }
 
 }
