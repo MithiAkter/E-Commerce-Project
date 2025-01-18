@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SubCategory\SubCategoryController;
 use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\Admin\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,6 +82,16 @@ Route::middleware('auth')->group(function () {
 
     //frontend routes
     Route::post('/store/newsletter', [FrontController::class, 'StoreNewsletter'])->name('store.newsletter');
+
+
+    //blog routes
+    Route::get('/admin/post/all', [PostController::class, 'index'])->name('all.blogpost');
+    Route::get('/admin/add/post', [PostController::class, 'create'])->name('add.blogpost');
+    Route::post('/admin/store/post', [PostController::class, 'store'])->name('store.blogpost');
+    Route::get('/edit/post/{id}', [PostController::class, 'EditPost'])->name('blogpost.edit');
+    Route::post('/update/post/{id}', [PostController::class, 'UpdatePost'])->name('blogpost.update');
+    Route::get('/delete/post/{id}', [PostController::class, 'DeletePost'])->name('blogpost.destroy');;
+
 
 
     // Route::get('edit/category/{id}','Admin\Category\CategoryController@EditCategory');
