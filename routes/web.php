@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Coupon\CouponController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\admin\Wishlist\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/delete/post/{id}', [PostController::class, 'DeletePost'])->name('blogpost.destroy');;
 
 
+    Route::get('add/wishlist/{id}', [WishlistController::class, 'AddWishlist']);
 
     // Route::get('edit/category/{id}','Admin\Category\CategoryController@EditCategory');
     // Route::post('update/category/{id}','Admin\Category\CategoryController@UpdateCategory');
